@@ -18,11 +18,11 @@ import scala.collection.JavaConverters._
 @Controller
 class CommentsController @Autowired()(commentService: CommentService) {
 
-	@RequestMapping(value = Array("/index"), method = Array(GET))
+	@RequestMapping(value = Array("/comments"), method = Array(GET))
 	def displayComments(req: HttpServletRequest, resp: HttpServletResponse) =
-		new ModelAndView("index", "comments", commentService.listComments().asJava)
+		new ModelAndView("comments", "comments", commentService.listComments().asJava)
 
-	@RequestMapping(value = Array("/index"), method = Array(POST))
+	@RequestMapping(value = Array("/comments"), method = Array(POST))
 	def addComment(comment: Comment) = {
 		commentService addComment comment
 		"redirect:/"

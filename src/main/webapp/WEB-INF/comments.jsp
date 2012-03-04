@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Comments</h1>
-<form action="index.htm" method="POST">
+<form action="comments.htm" method="POST">
 	<fieldset>
 		<legend>Add comment</legend>
 		<label>Name: <input name="name"/></label><br/>
