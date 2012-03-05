@@ -16,8 +16,9 @@
 		<input type="submit" value="Add comment"/>
 	</fieldset>
 	<c:forEach var="comment" items="${comments}">
-		<h2>${comment.name} on ${comment.date}</h2>
-		${comment.contents}
+		<h2><c:out value="${comment.name}" escapeXml="true"/></h2>
+		<h3>at ${comment.date}</h3>
+		<c:out value="${comment.contents}" escapeXml="true"/>
 		<hr/>
 	</c:forEach>
 </form>
