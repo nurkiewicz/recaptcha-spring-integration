@@ -1,0 +1,14 @@
+input.error, textarea.error {
+	background-color: #f88
+}
+
+label.error {
+	color: red;
+}
+
+label.label {
+	width: 140px;
+	text-align: right;
+	display: block;
+	float: left;
+}
