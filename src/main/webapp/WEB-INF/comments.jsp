@@ -12,8 +12,13 @@
 <form action="comments.htm" method="POST">
 	<fieldset>
 		<legend>Add comment</legend>
-		<label class="label" for="name">Name:</label><input name="name" id="name" class="required"/><br/>
-		<label class="label" for="contents">Comment:</label><textarea name="contents" id="contents" rows="4" cols="60" class="required"></textarea><br/>
+		<c:if test="${error == 'recaptcha'}">
+			<ul>
+				<li class="error">Incorrect ReCaptcha, please enter again</li>
+			</ul>
+		</c:if>
+		<label class="label" for="name">Name:</label><input name="name" id="name" class="required" value="${newComment.name}"/><br/>
+		<label class="label" for="contents">Comment:</label><textarea name="contents" id="contents" rows="4" cols="60" class="required">${newComment.contents}</textarea><br/>
 			<div id="recaptcha">&nbsp;</div>
 		<input type="submit" value="Add comment"/>
 	</fieldset>

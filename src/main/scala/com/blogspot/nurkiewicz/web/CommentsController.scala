@@ -10,6 +10,7 @@ import java.util.Date
 import org.springframework.web.servlet.ModelAndView
 import scala.collection.JavaConverters._
 import com.blogspot.nurkiewicz.recaptcha.ReCaptchaVerifier
+import collection.JavaConversions._
 
 /**
  * @author Tomasz Nurkiewicz
@@ -27,11 +28,16 @@ class CommentsController @Autowired()(
 
 	@RequestMapping(value = Array("/comments"), method = Array(POST))
 	def addComment(comment: NewComment) = {
-		if(!reCaptchaVerifier.validate(comment)) {
-			throw new IllegalArgumentException("Incorrect ReCaptcha")
+		if (reCaptchaVerifier.validate(comment)) {
+			commentService addComment new Comment(comment.name, comment.contents)
+			new ModelAndView("redirect:/")
+		} else {
+			new ModelAndView("comments", Map(
+				"comments" -> commentService.listComments().asJava,
+				"newComment" -> comment,
+				"error" -> "recaptcha"
+				))
 		}
-		commentService addComment new Comment(comment.name, comment.contents)
-		"redirect:/"
 	}
 
 }

@@ -2,7 +2,7 @@ input.error, textarea.error {
 	background-color: #f88
 }
 
-label.error {
+label.error, li.error {
 	color: red;
 }
 
