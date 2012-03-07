@@ -3,7 +3,11 @@ package com.blogspot.nurkiewicz.spring
 import net._01001111.text.LoremIpsum
 import org.springframework.stereotype.Controller
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
-import org.springframework.context.annotation.{Bean, ScopedProxyMode, ComponentScan, Configuration}
+import org.apache.http.client.HttpClient
+import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager
+import org.springframework.context.annotation._
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer
 
 /**
  * @author Tomasz Nurkiewicz
@@ -15,9 +19,16 @@ import org.springframework.context.annotation.{Bean, ScopedProxyMode, ComponentS
 	excludeFilters = Array(
 		new ComponentScan.Filter(value = Array[Class[_]](classOf[Controller], classOf[ComponentScan], classOf[EnableWebMvc]))
 ))
+@PropertySource(Array("classpath:/app.properties"))
 class SpringConfiguration {
 
 	@Bean
-	def loremIpsum() = new LoremIpsum
+	def httpClient() = new DefaultHttpClient(clientConnManager())
+
+	@Bean
+	def clientConnManager() = new ThreadSafeClientConnManager()
+
+	@Bean
+	def propertySourcesPlaceholderConfigurer() = new PropertySourcesPlaceholderConfigurer()
 
 }
