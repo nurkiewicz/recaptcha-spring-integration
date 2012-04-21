@@ -1,7 +1,7 @@
 package com.blogspot.nurkiewicz.web
 
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.{RequestMethod, RequestMapping}
+import org.springframework.web.bind.annotation.{RequestMethod, InitBinder, RequestMapping}
 import RequestMethod._
 import org.springframework.beans.factory.annotation.Autowired
 import reflect.BeanProperty
@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView
 import scala.collection.JavaConverters._
 import com.blogspot.nurkiewicz.recaptcha.ReCaptchaVerifier
 import collection.JavaConversions._
+import org.springframework.web.bind.WebDataBinder
+import com.blogspot.nurkiewicz.spring.MyWebDataBinder
 
 /**
  * @author Tomasz Nurkiewicz
@@ -38,6 +40,12 @@ class CommentsController @Autowired()(
 				"error" -> "recaptcha"
 				))
 		}
+	}
+
+	@InitBinder
+	def initBinder(binder: MyWebDataBinder) {
+		binder.addFieldAlias("recaptcha_response_field", "recaptchaResponse")
+		binder.addFieldAlias("recaptcha_challenge_field", "recaptchaChallenge")
 	}
 
 }

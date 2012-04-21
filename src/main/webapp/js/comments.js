@@ -3,11 +3,7 @@ $(function() {
 			"recaptcha",
 			{
 				theme: "white",
-				lang : 'en',
-				callback: function() {
-					$('#recaptcha_response_field').attr('name', 'recaptchaResponse');
-					$('#recaptcha_challenge_field').attr('name', 'recaptchaChallenge');
-				}
+				lang : 'en'
 			}
 	);
 	$('form').validate({
