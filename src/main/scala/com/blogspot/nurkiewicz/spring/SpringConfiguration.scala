@@ -1,9 +1,7 @@
 package com.blogspot.nurkiewicz.spring
 
-import net._01001111.text.LoremIpsum
 import org.springframework.stereotype.Controller
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
-import org.apache.http.client.HttpClient
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager
 import org.springframework.context.annotation._
@@ -20,6 +18,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer
 		new ComponentScan.Filter(value = Array[Class[_]](classOf[Controller], classOf[ComponentScan], classOf[EnableWebMvc]))
 ))
 @PropertySource(Array("classpath:/app.properties"))
+@ImportResource(Array("classpath:/recaptcha-integration.xml"))
 class SpringConfiguration {
 
 	@Bean
