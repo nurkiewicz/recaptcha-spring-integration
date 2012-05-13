@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView
 import scala.collection.JavaConverters._
 import com.blogspot.nurkiewicz.recaptcha.ReCaptchaVerifier
 import collection.JavaConversions._
-import org.springframework.web.bind.WebDataBinder
 import com.blogspot.nurkiewicz.spring.MyWebDataBinder
 
 /**
@@ -30,7 +29,7 @@ class CommentsController @Autowired()(
 
 	@RequestMapping(value = Array("/comments"), method = Array(POST))
 	def addComment(comment: NewComment) = {
-		if (reCaptchaVerifier.validate(comment)) {
+		if (reCaptchaVerifier validate comment) {
 			commentService addComment new Comment(comment.name, comment.contents)
 			new ModelAndView("redirect:/")
 		} else {

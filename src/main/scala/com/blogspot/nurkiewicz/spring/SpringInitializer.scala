@@ -22,8 +22,8 @@ class SpringInitializer extends WebApplicationInitializer {
 
 	def createRootContext(container: ServletContext) {
 		val rootContext = new AnnotationConfigWebApplicationContext
-		rootContext.register(classOf[SpringConfiguration])
-		container.addListener(new ContextLoaderListener(rootContext))
+		rootContext register classOf[SpringConfiguration]
+		container addListener new ContextLoaderListener(rootContext)
 	}
 
 	def onStartup(container: ServletContext) {
